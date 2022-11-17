@@ -4,10 +4,10 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import CreateIcon from "@mui/icons-material/Create";
-import Avatar from "@mui/material/Avatar";
-import './navbar.scss'
+import "./navbar.scss";
+import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ currentUserData }) {
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -28,13 +28,11 @@ function Navbar() {
           <li className="item">
             <KeyboardVoiceIcon className="icon" />
           </li>
-          <li className="item">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="avatar"
-            />
-          </li>
+          <Link to="/edit">
+            <li className="item">
+              <img src={currentUserData.img} alt="" className="avatar" />
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

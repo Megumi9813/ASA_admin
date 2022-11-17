@@ -7,6 +7,11 @@
   font-family: "Nunito", sans-serif;
 }
 
-main {
-  flex: 6 1;
+.App {
+  display: flex;
+  position: relative;
+  width: 100%;
+  main {
+    flex: 6 1;
+  }
 }

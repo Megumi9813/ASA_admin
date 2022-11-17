@@ -1,5 +1,4 @@
-export const userColumns = [
-  // { field: "id", headerName: "ID", width: 70 },
+export const teacherColumns = [
   {
     field: "user",
     headerName: "Name",
@@ -17,11 +16,6 @@ export const userColumns = [
     field: "email",
     headerName: "Email",
     width: 230,
-  },
-  {
-    field: "language",
-    headerName: "Language",
-    width: 150,
   },
   {
     field: "testType",

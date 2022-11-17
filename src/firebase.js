@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from 'firebase/storage' 
 
@@ -17,7 +17,3 @@ export const db = getFirestore(app);
 export const auth = getAuth();
 export const storage = getStorage(app);
 
-
-export function logout() {
-  return signOut(auth);
-}

@@ -6,26 +6,37 @@ import SchoolIcon from "@mui/icons-material/School";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import GroupsIcon from "@mui/icons-material/Groups";
-import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
-import GradingIcon from "@mui/icons-material/Grading";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import QueuePlayNextIcon from "@mui/icons-material/QueuePlayNext";
-import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
 import CreateIcon from "@mui/icons-material/Create";
 import { useNavigate } from "react-router-dom";
-import { logout } from '../../firebase'
+import { auth } from "../../firebase";
+import { signOut } from "firebase/auth";
 
-function Sidebar() {
+function Sidebar({ currentUserData }) {
   const navigate = useNavigate();
 
-  async function handleLogout() {
+  const logOut = () => {
     try {
-      await logout();
-      navigate("/login")
-    } catch  {
-      alert("Error!")
+      signOut(auth).then(() => console.log("signed out!"))
+      
+      navigate("/login");
+    } catch (error) {
+      console.log("Error logging out: ", error);
+      // console.log(currentUserData);
     }
-  }
+    // signOut(auth);
+    // console.log(currentUserData);
+    // navigate("/login");
+  };
+
+  // async function handleLogout() {
+  //   try {
+  //     await logout();
+  //     navigate("/login")
+  //   } catch  {
+  //     alert("Error!")
+  //   }
+  // }
 
   return (
     <div className="sidebar">
@@ -49,19 +60,27 @@ function Sidebar() {
               <span>Students</span>
             </li>
           </Link>
-          <li>
-            <GroupsIcon className="icon" />
-            <span>Teachers</span>
-          </li>
+          <Link to="/teachers" style={{ textDecoration: "none" }}>
+            <li>
+              <GroupsIcon className="icon" />
+              <span>Teachers</span>
+            </li>
+          </Link>
           <li>
             <CreateIcon className="icon" />
-            <span>Writing</span>
+            <span>Submitted Writing</span>
           </li>
-          <li>
+          {/* <li>
             <KeyboardVoiceIcon className="icon" />
-            <span>Speaking</span>
-          </li>
-          <p className="sidebar_section-title">REVIEW</p>
+            <span>Submitted Speaking</span>
+          </li> */}
+          <Link to="/questions/writing" style={{ textDecoration: "none" }}>
+            <li>
+              <SchoolIcon className="icon" />
+              <span>Writing Questions</span>
+            </li>
+          </Link>
+          {/* <p className="sidebar_section-title">REVIEW</p>
           <li>
             <GradingIcon className="icon" />
             <span>Writing</span>
@@ -69,16 +88,24 @@ function Sidebar() {
           <li>
             <SettingsVoiceIcon className="icon" />
             <span>Speaking</span>
-          </li>
+          </li> */}
           <p className="sidebar_section-title">SERVICE</p>
-          <li>
-            <NoteAddIcon className="icon" />
-            <span>Add Writing</span>
-          </li>
-          <li>
+          <Link to="/update/Writing" style={{ textDecoration: "none" }}>
+            <li>
+              <NoteAddIcon className="icon" />
+              <span>Add Writing</span>
+            </li>
+          </Link>
+          <Link to="/courses/add" style={{ textDecoration: "none" }}>
+            <li>
+              <NoteAddIcon className="icon" />
+              <span>Add Courses</span>
+            </li>
+          </Link>
+          {/* <li>
             <QueuePlayNextIcon className="icon" />
             <span>Add Speaking</span>
-          </li>
+          </li> */}
           <p className="sidebar_section-title">USER</p>
           <Link to="/profile" style={{ textDecoration: "none" }}>
             <li>
@@ -86,7 +113,7 @@ function Sidebar() {
               <span>Profile</span>
             </li>
           </Link>
-          <li onClick={handleLogout}>
+          <li onClick={logOut}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>

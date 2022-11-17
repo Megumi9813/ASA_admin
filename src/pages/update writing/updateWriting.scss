@@ -1,0 +1,157 @@
+.updateWriting {
+  height: 600px;
+  padding: 20px;
+  .top {
+    .updateWriting_title {
+      width: 100%;
+      font-size: 24px;
+      color: gray;
+      margin-bottom: 10px;
+    }
+  }
+  .bottom {
+    // height: 100%;
+    form {
+      height: 100%;
+      .formInput {
+        // .buttons {
+        //   .activeButton {
+        //     background-color: green;
+        //     color: #fff;
+        //   }
+        //   button {
+        //     color: green;
+        //     font-size: 16px;
+        //     font-weight: 400;
+        //     border: 1px solid green;
+        //     padding: 5px;
+        //     border-radius: 5px;
+        //     cursor: pointer;
+        //     background-color: #fff;
+        //     margin-right: 30px;
+        //     padding: 5px 10px;
+        //   }
+        //   // button:active {
+        //   //   background-color: green;
+        //   // }
+        // }
+        .selections {
+          display: flex;
+          .selection {
+            select {
+              border: none;
+              background-color: #7451f8;
+              color: #fff;
+              height: 40px;
+              border-radius: 4px;
+              margin-right: 8px;
+              padding: 0 4px;
+              width: 160px;
+              outline: none;
+            }
+          }
+        }
+        .classRoom_container {
+          border: 1px solid rgba(224, 224, 224, 1);
+          color: rgba(0, 0, 0, 0.87);
+          border-radius: 4px;
+          max-width: 1200px;
+          margin-top: 16px;
+          .classRoom_header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(224, 224, 224, 1);
+            padding: 8px 16px;
+            input {
+              padding: 0 4px;
+              width: 320px;
+              outline: none;
+            }
+          }
+          .classRoom_body {
+            display: flex;
+            .question_intro {
+              display: flex;
+              font-weight: 500;
+              color: grey;
+              padding: 8px 0;
+              svg {
+                padding-right: 8px;
+              }
+            }
+            .question_area {
+              textarea {
+                width: 100%;
+                height: 100px;
+                padding: 4px;
+                resize: none;
+                outline: none;
+              }
+            }
+            .writing_question-left {
+              width: 50%;
+              padding: 8px 16px;
+              border-right: 1px solid rgba(224, 224, 224, 1);
+              label {
+                margin-bottom: 4px;
+                display: inline-block;
+              }
+            }
+            .writing_question-right {
+              width: 50%;
+              padding: 8px 16px;
+              .right-top,
+              .right-bottom {
+                padding: 8px 0 16px;
+                label {
+                  margin-bottom: 4px;
+                  display: inline-block;
+                  width: 100%;
+                }
+                .task_input {
+                  display: flex;
+                  width: 100%;
+                  input {
+                    width: 100%;
+                  }
+                  button {
+                    margin-left: 8px;
+                    padding: 0 16px;
+                  }
+                }
+              }
+              ul {
+                margin: 4px 0 0 16px;
+                li {
+                  input {
+                    width: 100%;
+                    display: inline-block;
+                    margin-bottom: 4px;
+                    outline: none;
+                  }
+                }
+              }
+              .submit-btn {
+                margin-bottom: 16px;
+                button {
+                  width: 100%;
+                  background-color: #7451f8;
+                  border: none;
+                  color: #fff;
+                  height: 40px;
+                  border-radius: 4px;
+                  margin-top: 8px;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+      .update_form {
+        height: 100%;
+      }
+    }
+  }
+}

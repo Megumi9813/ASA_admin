@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns } from "../../userDatatable";
+import { teacherColumns } from "../../teacherDatatable";
 import { db } from "../../firebase";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import "./datatable.scss";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import "./teacherDatatable.scss";
 
-const Datatable = () => {
+const TeacherDatatable = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
       try {
-        const querySnapshot = await getDocs(collection(db, "students"));
+        const querySnapshot = await getDocs(collection(db, "teachers"));
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
         });
-        // console.log(list)
         setData(list);
       } catch (err) {
         console.log(err);
@@ -28,7 +27,7 @@ const Datatable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "students", id));
+      await deleteDoc(doc(db, "teachers", id));
       setData(data.filter((item) => item.id !== id));
     } catch (err) {
       console.log(err);
@@ -46,7 +45,10 @@ const Datatable = () => {
             <Link to="/profile">
               <div className="viewButton">View</div>
             </Link>
-            <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>
+            <div
+              className="deleteButton"
+              onClick={() => handleDelete(params.row.id)}
+            >
               Delete
             </div>
           </div>
@@ -56,16 +58,16 @@ const Datatable = () => {
   ];
 
   return (
-    <div className="datatable">
-      <div className="datatable_title">
-        List of Students
-        <Link to="/students/new" className="link">
+    <div className="teacherDatatable">
+      <div className="teacherDatatable_title">
+        List of Teachers
+        {/* <Link to="/update/Writing" className="link">
           Add New
-        </Link>
+        </Link> */}
       </div>
       <DataGrid
         rows={data}
-        columns={userColumns.concat(actionColumn)}
+        columns={teacherColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
@@ -74,4 +76,4 @@ const Datatable = () => {
   );
 };
 
-export default Datatable;
+export default TeacherDatatable;
