@@ -1,0 +1,112 @@
+.updateSpeaking {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .updateSpeaking-title {
+      width: 100%;
+      font-size: 24px;
+      color: gray;
+      margin-bottom: 10px;
+    }
+    .submit-btn {
+      button {
+        width: 120px;
+        padding: 10px;
+        border: none;
+        background-color: teal;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 24px;
+        border-radius: 4px;
+      }
+    }
+  }
+  .bottom {
+    border-radius: 4px;
+    max-width: 1200px;
+    margin-top: 16px;
+    form {
+      padding: 8px 0 16px 0;
+      .tasks {
+        box-shadow: 2px 4px 10px 1px rgb(201 201 201 / 56%);
+        .task {
+          display: flex;
+          flex-direction: column;
+          padding: 20px;
+          border: 1px solid rgb(224, 224, 224);
+          .task-title-wrapper {
+            display: flex;
+            label {
+              cursor: pointer;
+            }
+            svg {
+              margin-left: 8px;
+            }
+            // input {
+            //   cursor: pointer;
+            // }
+            // .task-title {
+            //   font-weight: bold;
+            // }
+          }
+          .task-body {
+            display: flex;
+            textarea {
+              width: 100%;
+            }
+            button {
+              width: 10%;
+            }
+          }
+          .img-label {
+            display: flex;
+            padding: 4px 0;
+            .icon {
+              cursor: pointer;
+            }
+          }
+          textarea {
+            resize: none;
+            outline: none;
+            height: 48px;
+            padding: 4px;
+          }
+        }
+      }
+      .submit-btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        button {
+          width: 150px;
+          padding: 10px;
+          border: none;
+          background-color: teal;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+          margin-top: 24px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}
+
+// .modal-dialog {
+//   .modal-content {
+//     .modal-header {
+//       border: none;
+//     }
+//     .modal-body {
+//       img {
+//         width: 100%;
+//       }
+//     }
+//   }
+// }

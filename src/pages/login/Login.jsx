@@ -27,12 +27,6 @@ function Login({ currentUserData }) {
       });
   };
 
-  useEffect(() => {
-      console.log({ currentUserData });
-  }, [])
-
-  // console.log({currentUserData});
-
   return (
     <div className="login">
       <form onSubmit={handleLogin}>

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import "./new.scss";
+import "./newTeacher.scss";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc, collection } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
-const New = ({ inputs, title }) => {
+const NewTeacher = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
   const [per, setPerc] = useState(null);
@@ -66,10 +66,11 @@ const New = ({ inputs, title }) => {
         data.email,
         data.password
       );
-      await setDoc(doc(db, "students", res.user.uid), {
+      const teacherRef = collection(db, "teachers");
+      await setDoc(doc(teacherRef, res.user.uid), {
         ...data,
         timeStamp: serverTimestamp(),
-        userRole: "student",
+        userRole: "teacher",
       });
       navigate(-1);
     } catch (error) {
@@ -124,4 +125,4 @@ const New = ({ inputs, title }) => {
   );
 };
 
-export default New;
+export default NewTeacher;

@@ -22,21 +22,8 @@ function Sidebar({ currentUserData }) {
       navigate("/login");
     } catch (error) {
       console.log("Error logging out: ", error);
-      // console.log(currentUserData);
     }
-    // signOut(auth);
-    // console.log(currentUserData);
-    // navigate("/login");
   };
-
-  // async function handleLogout() {
-  //   try {
-  //     await logout();
-  //     navigate("/login")
-  //   } catch  {
-  //     alert("Error!")
-  //   }
-  // }
 
   return (
     <div className="sidebar">
@@ -45,7 +32,7 @@ function Sidebar({ currentUserData }) {
           <span className="logo">ASA Admin</span>
         </Link>
       </div>
-      <hr />
+      {/* <hr /> */}
       <div className="sidebar_wrapper">
         <ul>
           <p className="sidebar_section-title">MAIN</p>
@@ -66,10 +53,24 @@ function Sidebar({ currentUserData }) {
               <span>Teachers</span>
             </li>
           </Link>
-          <li>
-            <CreateIcon className="icon" />
-            <span>Submitted Writing</span>
-          </li>
+          <Link to="submitted/answers" style={{ textDecoration: "none" }}>
+            <li>
+              <CreateIcon className="icon" />
+              <span>Submitted Answers</span>
+            </li>
+          </Link>
+          {/* <Link to="submitted/writing" style={{ textDecoration: "none" }}>
+            <li>
+              <CreateIcon className="icon" />
+              <span>Submitted Writing</span>
+            </li>
+          </Link>
+          <Link to="submitted/speaking" style={{ textDecoration: "none" }}>
+            <li>
+              <CreateIcon className="icon" />
+              <span>Submitted Speaking</span>
+            </li>
+          </Link> */}
           {/* <li>
             <KeyboardVoiceIcon className="icon" />
             <span>Submitted Speaking</span>
@@ -77,35 +78,40 @@ function Sidebar({ currentUserData }) {
           <Link to="/questions/writing" style={{ textDecoration: "none" }}>
             <li>
               <SchoolIcon className="icon" />
-              <span>Writing Questions</span>
+              <span>Courses</span>
             </li>
           </Link>
-          {/* <p className="sidebar_section-title">REVIEW</p>
-          <li>
-            <GradingIcon className="icon" />
-            <span>Writing</span>
-          </li>
-          <li>
-            <SettingsVoiceIcon className="icon" />
-            <span>Speaking</span>
-          </li> */}
           <p className="sidebar_section-title">SERVICE</p>
-          <Link to="/update/Writing" style={{ textDecoration: "none" }}>
+          {/* <Link to="/update/Writing" style={{ textDecoration: "none" }}>
             <li>
               <NoteAddIcon className="icon" />
               <span>Add Writing</span>
             </li>
-          </Link>
-          <Link to="/courses/add" style={{ textDecoration: "none" }}>
+          </Link> */}
+          <Link to="/service/CELPIP-writing" style={{ textDecoration: "none" }}>
             <li>
               <NoteAddIcon className="icon" />
-              <span>Add Courses</span>
+              <span>Add CELPIP Writing</span>
             </li>
           </Link>
-          {/* <li>
-            <QueuePlayNextIcon className="icon" />
-            <span>Add Speaking</span>
-          </li> */}
+          <Link to="/update/Speaking" style={{ textDecoration: "none" }}>
+            <li>
+              <NoteAddIcon className="icon" />
+              <span>Add CELPIP Speaking</span>
+            </li>
+          </Link>
+          <Link to="/service/IELTS-writing" style={{ textDecoration: "none" }}>
+            <li>
+              <NoteAddIcon className="icon" />
+              <span>Add IELTS Writing</span>
+            </li>
+          </Link>
+          <Link to="/service/IELTS-speaking" style={{ textDecoration: "none" }}>
+            <li>
+              <NoteAddIcon className="icon" />
+              <span>Add IELTS Speaking</span>
+            </li>
+          </Link>
           <p className="sidebar_section-title">USER</p>
           <Link to="/profile" style={{ textDecoration: "none" }}>
             <li>

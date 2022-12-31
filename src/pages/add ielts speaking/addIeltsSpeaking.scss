@@ -1,0 +1,57 @@
+.addIeltsSpeaking {
+    padding: 20px;
+    .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        .updateSpeaking-title {
+            width: 100%;
+            font-size: 24px;
+            color: gray;
+        }
+        button {
+            border: none;
+            background-color: teal;
+            color: #fff;
+            border-radius: 4px;
+            padding: 8px 20px;
+            cursor: pointer;
+        }
+    }
+    .bottom {
+        .tasks{
+            .task {
+                padding: 20px;
+                margin-bottom: 32px;
+                box-shadow: 2px 4px 10px 1px rgb(201 201 201 / 56%);
+                .task-title {
+                    color: gray;
+                    margin: 8px 0;
+                }
+                .question-container {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 8px;
+                    label {
+                        margin-bottom: 4px;
+                    }
+                    textarea {
+                        resize: none;
+                        outline: none;
+                        padding: 4px;
+                    }
+                    .part2 {
+                        height: 120px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// border: 1px solid rgb(224, 224, 224);
+//     color: rgba(0, 0, 0, 0.87);
+//     border-radius: 4px;
+//     max-width: 1200px;
+//     margin-top: 16px;

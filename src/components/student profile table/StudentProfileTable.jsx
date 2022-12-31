@@ -1,19 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
-import { teacherColumns } from "../../teacherDatatable";
+import { userColumns } from "../../userDatatable";
 import { db } from "../../firebase";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
-import "./teacherDatatable.scss";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { studentProfileColumns } from '../../studentProfileDatatable';
+// import "./datatable.scss";
 
-const TeacherDatatable = () => {
+const StudentProfileTable = ({ startedCourses }) => {
+
+    console.log(startedCourses);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
       try {
-        const querySnapshot = await getDocs(collection(db, "teachers"));
+        const querySnapshot = await getDocs(collection(db, "students"));
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
         });
@@ -27,7 +30,7 @@ const TeacherDatatable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "teachers", id));
+      await deleteDoc(doc(db, "students", id));
       setData(data.filter((item) => item.id !== id));
     } catch (err) {
       console.log(err);
@@ -42,9 +45,20 @@ const TeacherDatatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/profile">
+            {params.row.status === "submitted" ||
+            params.row.status === "reviewed" ? (
+              <Link to={"/" + params.row.id}>
+                <div className="viewButton">Review</div>
+              </Link>
+            ) : (
+              <div className="viewButton" style={{ cursor: "not-allowed" }}>
+                Review
+              </div>
+            )}
+            {/* <Link to={"/" + params.row.id}>
+              {console.log(params.row)}
               <div className="viewButton">View</div>
-            </Link>
+            </Link> */}
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
@@ -58,22 +72,16 @@ const TeacherDatatable = () => {
   ];
 
   return (
-    <div className="teacherDatatable">
-      <div className="teacherDatatable_title">
-        List of Teachers
-        <Link to="/teachers/new" className="link">
-          Add New
-        </Link>
-      </div>
+    <div className="datatable" style={{ padding: "0" }}>
       <DataGrid
-        rows={data}
-        columns={teacherColumns.concat(actionColumn)}
+        rows={startedCourses}
+        columns={studentProfileColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
-        checkboxSelection
+        // checkboxSelection
       />
     </div>
   );
 };
 
-export default TeacherDatatable;
+export default StudentProfileTable;

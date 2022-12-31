@@ -1,21 +1,25 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
-import { teacherColumns } from "../../teacherDatatable";
+import { submittedAnswersColumns } from "../../submittedAnswersDatatable";
 import { db } from "../../firebase";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
-import "./teacherDatatable.scss";
+import "./submittedAnswersDatatable.scss";
 
-const TeacherDatatable = () => {
+const SubmittedWritingDatatable = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       let list = [];
       try {
-        const querySnapshot = await getDocs(collection(db, "teachers"));
+        const querySnapshot = await getDocs(collection(db, "submittedAnswer"));
         querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
+          list.push({
+            id: doc.id,
+            ...doc.data(),
+            date: doc.data().timeStamp.toDate().toDateString(),
+          });
         });
         setData(list);
       } catch (err) {
@@ -27,12 +31,14 @@ const TeacherDatatable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "teachers", id));
+      await deleteDoc(doc(db, "submittedAnswer", id));
       setData(data.filter((item) => item.id !== id));
     } catch (err) {
       console.log(err);
     }
   };
+
+  // console.log(data)
 
   const actionColumn = [
     {
@@ -42,9 +48,14 @@ const TeacherDatatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/profile">
-              <div className="viewButton">View</div>
-            </Link>
+            {params.row.status === "submitted" ||
+            params.row.status === "reviewed" ? (
+              <Link to={"/" + params.row.id}>
+                <div className="viewButton">Review</div>
+              </Link>
+            ) : (
+                <div className="viewButton" style={{cursor: "not-allowed"}}>Review</div>
+            )}
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
@@ -58,22 +69,19 @@ const TeacherDatatable = () => {
   ];
 
   return (
-    <div className="teacherDatatable">
-      <div className="teacherDatatable_title">
-        List of Teachers
-        <Link to="/teachers/new" className="link">
-          Add New
-        </Link>
+    <div className="submittedWritingDatatable">
+      <div className="submittedWritingDatatable_title">
+        List of Submitted Answers
       </div>
       <DataGrid
         rows={data}
-        columns={teacherColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
+        columns={submittedAnswersColumns.concat(actionColumn)}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
         checkboxSelection
       />
     </div>
   );
 };
 
-export default TeacherDatatable;
+export default SubmittedWritingDatatable;

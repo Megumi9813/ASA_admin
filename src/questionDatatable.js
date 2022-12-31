@@ -1,3 +1,5 @@
+import Avatar from "@mui/material/Avatar";
+
 export const writingQuestionColumns = [
   {
     field: "user",
@@ -6,8 +8,16 @@ export const writingQuestionColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img className="cellImg" src={params.row.img} alt="avatar" />
-          {params.row.username}
+          {params.row.submittedByImg ? (
+            <img
+              className="cellImg"
+              src={params.row.submittedByImg}
+              alt="avator"
+            />
+          ) : (
+            <Avatar sx={{ width: 32, height: 32 }} className="avator"></Avatar>
+          )}
+          {params.row.submittedBy}
         </div>
       );
     },
@@ -18,13 +28,18 @@ export const writingQuestionColumns = [
     width: 150,
   },
   {
-    field: "task",
-    headerName: "Task",
+    field: "skill",
+    headerName: "Skill",
     width: 150,
   },
   {
     field: "title",
     headerName: "Title",
+    width: 250,
+  },
+  {
+    field: "date",
+    headerName: "Created on",
     width: 300,
   },
 ];

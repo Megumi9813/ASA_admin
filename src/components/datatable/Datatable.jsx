@@ -17,7 +17,6 @@ const Datatable = () => {
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
         });
-        // console.log(list)
         setData(list);
       } catch (err) {
         console.log(err);
@@ -43,10 +42,13 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/profile">
+            <Link to={"/" + params.row.id}>
               <div className="viewButton">View</div>
             </Link>
-            <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>
+            <div
+              className="deleteButton"
+              onClick={() => handleDelete(params.row.id)}
+            >
               Delete
             </div>
           </div>
@@ -68,7 +70,7 @@ const Datatable = () => {
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
-        checkboxSelection
+        // checkboxSelection
       />
     </div>
   );

@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import ErrorIcon from "@mui/icons-material/Error";
 import "./updateWriting.scss";
 import { db } from "../../firebase";
-import { serverTimestamp, addDoc, collection } from "firebase/firestore";
+import {
+  serverTimestamp,
+  addDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
@@ -11,10 +16,7 @@ const UpdateWriting = ({ title, user }) => {
   const [task, setTask] = useState("");
   const [listOfTasks, setListOfTasks] = useState([]);
   const [userLoading, setUserLoading] = useState(true);
-
-  const navigate = useNavigate();
-
-  let nextId = 0;
+  const [teacher, setTeacher] = useState([]);
 
   const handleInput = (e) => {
     const id = e.target.id;
@@ -23,18 +25,38 @@ const UpdateWriting = ({ title, user }) => {
   };
 
   const handleArrayInput = (e) => {
+    e.preventDefault();
     const arrayValue = e.target.value;
     setTask(arrayValue);
   };
 
+  const currentUserImg = teacher
+    .filter((item) => item.id === user.uid)
+    .map((data) => data.img);
+
+  const currentUserName = teacher
+    .filter((item) => item.id === user.uid)
+    .map((data) => data.displayName);
+
+  function getRandomInt() {
+    return Math.floor(Math.random() * (999 - 100 + 1) + 100);
+  }
+
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, "writing"), {
+      await addDoc(collection(db, "courses"), {
         ...data,
         timeStamp: serverTimestamp(),
         questionRightBottom: listOfTasks,
-        submittedBy: user.uid,
+        submittedBy: currentUserName,
+        submittedByImg: currentUserImg,
+        path: getRandomInt(),
+        type: "lesson",
+        lessonImg:
+          data.testType === "CELPIP"
+            ? "https://firebasestorage.googleapis.com/v0/b/auth-development-676e2.appspot.com/o/celpip%20logo.png?alt=media&token=b14b0cf9-357d-4800-8267-ae38d1d29754"
+            : "https://firebasestorage.googleapis.com/v0/b/auth-development-676e2.appspot.com/o/ielts.svg?alt=media&token=f419bcc3-f0ea-4928-a40d-69b3c2e0ba12",
       });
     } catch (error) {
       console.log(error);
@@ -45,6 +67,19 @@ const UpdateWriting = ({ title, user }) => {
     if (user !== null) {
       setUserLoading(false);
     }
+    const fetchData = async () => {
+      let list = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "teachers"));
+        querySnapshot.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setTeacher(list);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
   }, [user]);
 
   return (
@@ -57,13 +92,27 @@ const UpdateWriting = ({ title, user }) => {
           <div className="formInput">
             <div className="selections">
               <div className="selection">
+                <select id="courseType" onChange={handleInput}>
+                  <option value="">Select Course</option>
+                  <option id="courseType" value="IELTS Writing">
+                    IELTS Writing
+                  </option>
+                  <option id="courseType" value="CELPIP Writing">
+                    CELPIP Writing
+                  </option>
+                  <option id="courseType" value="basic-computer-skill">
+                    Basic Computer Skill
+                  </option>
+                </select>
+              </div>
+              <div className="selection">
                 <select id="testType" onChange={handleInput}>
                   <option value="">Select Test Type</option>
-                  <option id="testType" value="IELTS">
-                    IELTS
-                  </option>
                   <option id="testType" value="CELPIP">
                     CELPIP
+                  </option>
+                  <option id="testType" value="IELTS">
+                    IELTS
                   </option>
                 </select>
               </div>
@@ -126,21 +175,27 @@ const UpdateWriting = ({ title, user }) => {
                   </div>
                   <div className="right-bottom">
                     <label>Tasks or Options: </label>
-                    <div className="task_input" onChange={handleInput}>
+                    <div className="task_input">
                       <input
                         id="questionRightBottom"
                         type="text"
                         value={task}
-                        // onChange={(e) => setTask(e.target.value)}
                         onChange={handleArrayInput}
                       />
                       <button
+                        type="button"
                         className="task-button"
                         onClick={() => {
                           setTask("");
                           setListOfTasks([
                             ...listOfTasks,
-                            { id: nextId++, task: task },
+                            {
+                              id:
+                                Number(
+                                  listOfTasks.slice(-1).map((item) => item.id)
+                                ) + 1,
+                              task: task,
+                            },
                           ]);
                         }}
                       >

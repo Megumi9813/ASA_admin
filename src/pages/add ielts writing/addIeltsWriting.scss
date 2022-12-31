@@ -1,0 +1,122 @@
+.addIeltsWriting {
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    .addCelpipWriting-title {
+      width: 100%;
+      font-size: 24px;
+      color: gray;
+    }
+    button {
+      border: none;
+      background-color: green;
+      color: #fff;
+      border-radius: 4px;
+      padding: 8px 20px;
+      cursor: pointer;
+    }
+  }
+  .bottom {
+    .task-container {
+      box-shadow: 2px 4px 10px 1px rgb(201 201 201 / 56%);
+      padding: 20px;
+      margin-bottom: 32px;
+      .task-title {
+        font-size: 18px;
+        color: gray;
+      }
+      form {
+        height: 100%;
+        .formInput {
+          .selections {
+            display: flex;
+            .selection {
+              select {
+                border: none;
+                background-color: #7451f8;
+                color: #fff;
+                height: 40px;
+                border-radius: 4px;
+                margin-right: 8px;
+                padding: 0 4px;
+                width: 160px;
+                outline: none;
+              }
+            }
+          }
+          .classRoom_container {
+            // border: 1px solid rgba(224, 224, 224, 1);
+            color: rgba(0, 0, 0, 0.87);
+            border-radius: 4px;
+            max-width: 1200px;
+            margin-top: 16px;
+            .classRoom_header {
+                p {
+                    margin-bottom: 16px;
+                }
+              align-items: center;
+              justify-content: space-between;
+            }
+            .classRoom_middle {
+              border: 1px solid rgb(94, 93, 93);
+              display: flex;
+              flex-direction: column;
+              padding: 24px;
+              margin: 16px 0;
+              .question-container {
+                width: 100%;
+                // padding: 0 24px;
+                // margin: 0 auto;
+                margin-bottom: 16px;
+                textarea {
+                  height: 80px;
+                }
+                textarea,
+                input {
+                  width: 100%;
+                  padding: 4px;
+                  outline: none
+                }
+                p {
+                  margin-bottom: 16px;
+                }
+              }
+              ul {
+                width: 100%;
+                margin-left: 16px;
+                // padding: 0 24px;
+              }
+              .question-bottom {
+                display: flex;
+                button {
+                    margin-left: 8px;
+                    padding: 0 16px;
+                }
+              }
+            }
+            .classRoom_bottom {
+                .classRoom_bottom-text {
+                    margin-bottom: 16px;
+                    display: flex;
+                }
+                .bold {
+                    font-weight: bold;
+                }
+                .space {
+                    padding: 0 6px;
+                }
+            }
+          }
+        }
+        .update_form {
+          height: 100%;
+        }
+      }
+    }
+  }
+}

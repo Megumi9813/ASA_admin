@@ -1,4 +1,4 @@
-import "../new/new.scss";
+import "../new student/new.scss";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 
 const Edit = ({ title, currentUserData, inputs }) => {
@@ -22,10 +22,7 @@ const Edit = ({ title, currentUserData, inputs }) => {
             {inputs.map((input) => (
               <div className="formInput" key={input.id}>
                 <label>{input.label}</label>
-                <input
-                  id={input.id}
-                  type={input.type}
-                />
+                <input id={input.id} type={input.type} />
               </div>
             ))}
             <button type="submit">Update</button>

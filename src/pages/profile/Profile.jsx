@@ -3,6 +3,8 @@ import Table from "../../components/table/Table";
 import "./profile.scss";
 
 function Profile({ currentUserData }) {
+
+  console.log(currentUserData);
   return (
     <div className="profile">
       <div className="profile_container">

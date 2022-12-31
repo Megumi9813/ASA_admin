@@ -1,5 +1,6 @@
-export const userColumns = [
-  // { field: "id", headerName: "ID", width: 70 },
+import Avatar from "@mui/material/Avatar";
+
+export const teacherColumns = [
   {
     field: "user",
     headerName: "Name",
@@ -7,7 +8,12 @@ export const userColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img className="cellImg" src={params.row.img} alt="avatar" />
+          {params.row.img ? (
+            <img className="cellImg" src={params.row.img} alt="avator" />
+          ) : (
+            <Avatar sx={{ width: 32, height: 32 }} className="avator"></Avatar>
+          )}
+          {/* <img className="cellImg" src={params.row.img} alt="avatar" /> */}
           {params.row.username}
         </div>
       );
@@ -17,11 +23,6 @@ export const userColumns = [
     field: "email",
     headerName: "Email",
     width: 230,
-  },
-  {
-    field: "language",
-    headerName: "Language",
-    width: 150,
   },
   {
     field: "testType",

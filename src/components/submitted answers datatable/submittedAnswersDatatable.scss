@@ -1,7 +1,7 @@
-.datatable {
-    height: 600px;
-    padding: 20px;
-  .datatable_title {
+.submittedWritingDatatable {
+  height: 671px;
+  padding: 20px;
+  .submittedWritingDatatable_title {
     width: 100%;
     font-size: 24px;
     color: gray;
@@ -29,9 +29,6 @@
       height: 32px;
       border-radius: 50%;
       object-fit: cover;
-      margin-right: 20px;
-    }
-    .avator {
       margin-right: 20px;
     }
   }

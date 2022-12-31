@@ -13,11 +13,15 @@ const WritingQuestionDatatable = () => {
     const fetchData = async () => {
       let list = [];
       try {
-        const querySnapshot = await getDocs(collection(db, "writing"));
+        const querySnapshot = await getDocs(collection(db, "courses"));
         querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
+          list.push({ 
+            id: doc.id, 
+            ...doc.data(),
+            date: doc.data().timeStamp.toDate().toDateString(),
+           });
         });
-        setData(list);
+        setData(list.filter((item) => item.courseType));
       } catch (err) {
         console.log(err);
       }
@@ -27,7 +31,7 @@ const WritingQuestionDatatable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, "writing", id));
+      await deleteDoc(doc(db, "courses", id));
       setData(data.filter((item) => item.id !== id));
     } catch (err) {
       console.log(err);
@@ -42,7 +46,7 @@ const WritingQuestionDatatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/profile">
+            <Link to={"/" + params.row.id}>
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -60,10 +64,10 @@ const WritingQuestionDatatable = () => {
   return (
     <div className="writingQuestionDatatable">
       <div className="writingQuestionDatatable_title">
-        List of Writing Questions
-        <Link to="/update/Writing" className="link">
+        List of Courses
+        {/* <Link to="/update/Writing" className="link">
           Add New
-        </Link>
+        </Link> */}
       </div>
       <DataGrid
         rows={data}
